@@ -7,13 +7,16 @@
 #              - Zen Browser, LibreWolf & Firefox
 # ==============================================================================
 
-{ config, lib, pkgs, modulesPath, ... }:
+{ config, lib, pkgs, modulesPath, inputs ? null, ... }:
 
 let
-  # Zen Browser community package fetched directly (works without enabling Flakes CLI)
-  zen-browser = import (builtins.fetchTarball "https://github.com/0xc000022070/zen-browser-flake/archive/main.tar.gz") {
-    inherit pkgs;
-  };
+  # Zen Browser package from flake input if provided, otherwise fetchTarball
+  zen-browser-pkg =
+    if inputs != null && inputs ? zen-browser
+    then inputs.zen-browser.packages.${pkgs.stdenv.hostPlatform.system}.default
+    else (import (builtins.fetchTarball "https://github.com/0xc000022070/zen-browser-flake/archive/main.tar.gz") {
+      inherit pkgs;
+    }).default;
 in
 {
   imports = [
@@ -135,6 +138,7 @@ in
   # 8. Nix & Package Management Settings
   # ----------------------------------------------------------------------------
   nixpkgs.config.allowUnfree = true;
+  nix.settings.experimental-features = [ "nix-command" "flakes" ];
   programs.nix-ld.enable = true;
   environment.localBinInPath = true;
 
@@ -153,7 +157,7 @@ in
   # ----------------------------------------------------------------------------
   environment.systemPackages = with pkgs; [
     # --- Web Browsers ---
-    zen-browser.default
+    zen-browser-pkg
     librewolf
     firefox
 
