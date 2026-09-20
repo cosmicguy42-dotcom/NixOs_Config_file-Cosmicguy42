@@ -24,6 +24,9 @@ in
     (modulesPath + "/installer/scan/not-detected.nix")
   ];
 
+  # Provide default for inputs so this file can be built both with and without Flakes
+  _module.args.inputs = lib.mkDefault null;
+
   # ----------------------------------------------------------------------------
   # 1. Hardware & Kernel Configuration
   # ----------------------------------------------------------------------------
@@ -109,6 +112,19 @@ in
     enable = true;
     wayland.enable = true;
   };
+  services.displayManager.defaultSession = "hyprland";
+
+  # Bluetooth management GUI service (blueman-applet)
+  services.blueman.enable = true;
+
+  # Security / Polkit authentication
+  security.polkit.enable = true;
+
+  # XDG Portals (ensures file picker & desktop integration work in Wayland apps)
+  xdg.portal = {
+    enable = true;
+    extraPortals = [ pkgs.xdg-desktop-portal-gtk ];
+  };
 
   # Flatpak support
   services.flatpak.enable = true;
@@ -171,10 +187,13 @@ in
 
     # --- Hyprland Desktop Ecosystem ---
     kitty                    # Default terminal for Hyprland
+    foot                     # Fast Wayland terminal (Tony's setup)
+    fzf                      # Fuzzy finder
     waybar                   # Highly customizable Wayland top/bottom bar
     rofi                     # Modern application launcher & window switcher
     wofi                     # Alternative Wayland app launcher
     dunst                    # Lightweight notification daemon
+    libnotify                # Notification sender tool (notify-send)
     swaybg                   # Wayland wallpaper manager
     hyprpaper                # Hyprland native wallpaper utility
     hyprlock                 # Fast, modern screen locker for Hyprland
@@ -184,6 +203,10 @@ in
     slurp                    # Interactive region selection tool (works with grim)
     pavucontrol              # Volume control GUI
     brightnessctl            # Display brightness control tool
+    pamixer                  # PipeWire / PulseAudio volume CLI for keybindings
+    playerctl                # Media player controller for media keys
+    networkmanagerapplet     # NetworkManager systray applet (nm-applet)
+    kdePackages.polkit-kde-agent-1 # Polkit authentication GUI agent
 
     # --- GUI Utilities & File Management ---
     kdePackages.dolphin      # Rich graphical file manager
@@ -204,10 +227,21 @@ in
     htop
     btop
     fastfetch
+    nnn                      # Fast terminal file manager (n3)
   ];
 
   # ----------------------------------------------------------------------------
-  # 11. NixOS System Release Version
+  # 11. Fonts (Nerd Fonts & Icons for Waybar, Kitty, Neovim)
+  # ----------------------------------------------------------------------------
+  fonts.packages = with pkgs; [
+    nerd-fonts.jetbrains-mono
+    font-awesome
+    noto-fonts
+    noto-fonts-color-emoji
+  ];
+
+  # ----------------------------------------------------------------------------
+  # 12. NixOS System Release Version
   # ----------------------------------------------------------------------------
   system.stateVersion = "26.05";
 }
