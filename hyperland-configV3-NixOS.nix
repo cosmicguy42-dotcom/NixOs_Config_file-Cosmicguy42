@@ -1,10 +1,11 @@
 # ==============================================================================
-# NixOS Configuration: hyperland-config-NixOS.nix
+# NixOS Configuration: hyperland-configV3-NixOS.nix
 # Description: Complete standalone NixOS configuration featuring:
 #              - Hyprland Wayland Compositor & ecosystem (Waybar, Rofi, Kitty, Dunst)
 #              - Essential CLI tools & utilities (Git, curl, wget, ripgrep, etc.)
 #              - Neovim (default editor) & VSCodium (Vim removed)
 #              - Zen Browser, LibreWolf & Firefox
+#              - Hybrid Graphics Acceleration (Intel Alder Lake + NVIDIA RTX 3050)
 # ==============================================================================
 
 { config, lib, pkgs, modulesPath, inputs ? null, ... }:
@@ -57,6 +58,44 @@ in
   # Bluetooth support
   hardware.bluetooth.enable = true;
   hardware.bluetooth.powerOnBoot = true;
+
+  # ----------------------------------------------------------------------------
+  # Accélération graphique & GPU Hybride (Intel Alder Lake + NVIDIA RTX 3050)
+  # ----------------------------------------------------------------------------
+  hardware.graphics = {
+    enable = true;
+    enable32Bit = true;
+    extraPackages = with pkgs; [
+      intel-media-driver   # Décodage matériel VA-API pour ton i5-12450H (Alder Lake)
+      libva-vdpau-driver
+      libvdpau-va-gl
+    ];
+  };
+
+  # Charger le pilote propriétaire NVIDIA officiel (remplace nouveau)
+  services.xserver.videoDrivers = [ "nvidia" ];
+
+  hardware.nvidia = {
+    modesetting.enable = true;
+    powerManagement.enable = false;
+    powerManagement.finegrained = false;
+    open = false; # Pilote propriétaire officiel (recommandé et stable sur RTX 3050)
+    nvidiaSettings = true;
+    package = config.boot.kernelPackages.nvidiaPackages.stable;
+
+    # Mode Hybride (PRIME Offload) :
+    # - Hyprland, Zen Browser et LibreWolf tournent sur l'iGPU Intel (0 lag, 4K fluide, batterie préservée)
+    # - La RTX 3050 reste en veille et ne s'allume que si tu lances une appli avec 'nvidia-offload'
+    prime = {
+      offload = {
+        enable = true;
+        enableOffloadCmd = true;
+      };
+      # Adresses PCI exactes de ta machine :
+      intelBusId = "PCI:0:2:0";
+      nvidiaBusId = "PCI:1:0:0";
+    };
+  };
 
   # ----------------------------------------------------------------------------
   # 2. Bootloader (UEFI / systemd-boot)
@@ -174,10 +213,18 @@ in
   # ----------------------------------------------------------------------------
   environment.systemPackages = with pkgs; [
     # --- Web Browsers ---
-    zen-browser-pkg
     librewolf
-    firefox
+    zen-browser-pkg    
 
+    # --- cool things ---
+    spotify    
+    gcc
+    python3
+    cargo
+    nmap
+    wireshark
+    qbittorrent
+    
     # --- Code & Text Editors ---
     neovim
     vscodium
@@ -187,8 +234,6 @@ in
 
     # --- Hyprland Desktop Ecosystem ---
     kitty                    # Default terminal for Hyprland
-    foot                     # Fast Wayland terminal (Tony's setup)
-    fzf                      # Fuzzy finder
     waybar                   # Highly customizable Wayland top/bottom bar
     rofi                     # Modern application launcher & window switcher
     wofi                     # Alternative Wayland app launcher
@@ -207,11 +252,12 @@ in
     playerctl                # Media player controller for media keys
     networkmanagerapplet     # NetworkManager systray applet (nm-applet)
     kdePackages.polkit-kde-agent-1 # Polkit authentication GUI agent
+    swaylock-effects
 
     # --- GUI Utilities & File Management ---
     kdePackages.dolphin      # Rich graphical file manager
     kdePackages.ark          # Archive manager
-    kdePackages.kate         # Graphical text editor
+    qimgv                    # Image Viewer
 
     # --- Essential Command-Line Utilities ---
     curl
@@ -221,13 +267,13 @@ in
     fd
     jq
     which
+
     file
     unzip
     zip
     htop
     btop
     fastfetch
-    nnn                      # Fast terminal file manager (n3)
   ];
 
   # ----------------------------------------------------------------------------
