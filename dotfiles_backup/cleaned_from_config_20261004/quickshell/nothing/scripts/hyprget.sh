@@ -1,1 +1,0 @@
-/home/kmv22/Everything-dots/config/quickshell/nothing/scripts/hyprget.sh

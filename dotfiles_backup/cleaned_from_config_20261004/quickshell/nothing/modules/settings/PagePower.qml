@@ -1,1 +1,0 @@
-/home/kmv22/Everything-dots/config/quickshell/nothing/modules/settings/PagePower.qml

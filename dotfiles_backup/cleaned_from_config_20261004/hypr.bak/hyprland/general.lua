@@ -1,1 +1,0 @@
-/home/kmv22/Everything-dots/config/hypr/hyprland/general.lua

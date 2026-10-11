@@ -1,1 +1,0 @@
-/home/kmv22/Everything-dots/config/hypr/hyprland/scripts/ai/show-loaded-ollama-models.sh
