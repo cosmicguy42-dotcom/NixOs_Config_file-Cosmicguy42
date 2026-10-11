@@ -1,0 +1,14 @@
+[
+  {
+    "uid": "mur8xqwyjoo0",
+    "replaces": "SUPER + SHIFT + ALT + Q",
+    "combo": "SUPER + SHIFT + Q",
+    "action": {
+      "type": "lua",
+      "value": "",
+      "lua": "hl.dsp.exec_cmd(\"hyprctl kill\")",
+      "label": ""
+    },
+    "description": "Window: Forcefully zap a window"
+  }
+]

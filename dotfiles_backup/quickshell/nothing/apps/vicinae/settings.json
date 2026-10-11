@@ -1,0 +1,18 @@
+{
+	"telemetry": { "system_info": false },
+	"close_on_focus_loss": true,
+	"pop_to_root_on_close": true,
+	"escape_key_behavior": "close_window",
+	"font": { "normal": { "family": "Space Mono" } },
+	"theme": {
+		"light": { "name": "nothing", "icon_theme": "Papirus-Light" },
+		"dark": { "name": "nothing", "icon_theme": "Papirus-Dark" }
+	},
+	"launcher_window": {
+		"blur": { "enabled": true },
+		"client_side_decorations": { "enabled": true, "border_width": 1, "shadow_size": 0 },
+		"size": { "width": 720, "height": 460 },
+		"layer_shell": { "enabled": true, "keyboard_interactivity": "exclusive", "layer": "overlay" }
+	},
+	"favorites": ["clipboard:history"]
+}

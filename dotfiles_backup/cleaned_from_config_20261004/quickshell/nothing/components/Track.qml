@@ -1,0 +1,1 @@
+/home/kmv22/Everything-dots/config/quickshell/nothing/components/Track.qml

@@ -1,0 +1,6 @@
+{
+  "mode": "{{mode}}",
+  "image": "{{image}}",
+<* for name, value in colors *>  "{{name}}": "{{value.default.hex}}",
+<* endfor *>  "_": ""
+}

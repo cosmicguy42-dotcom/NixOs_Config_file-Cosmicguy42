@@ -1,0 +1,1 @@
+/home/kmv22/Everything-dots/config/hypr/hyprland/scripts/fuzzel-emoji.sh

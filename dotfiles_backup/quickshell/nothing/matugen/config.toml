@@ -1,0 +1,23 @@
+# matugen config for the "nothing" shell (Hyprland session only).
+# Run via scripts/theme.sh; iNiR keeps its own ~/.config/matugen untouched.
+[config]
+
+[templates.shell]
+input_path = '~/.config/quickshell/nothing/matugen/templates/shell.json'
+output_path = '~/.local/state/nothing/colors.json'
+
+[templates.hyprland]
+input_path = '~/.config/quickshell/nothing/matugen/templates/hyprland.lua'
+output_path = '~/.config/hypr/hyprland/colors.lua'
+
+[templates.hyprlock]
+input_path = '~/.config/quickshell/nothing/matugen/templates/hyprlock.conf'
+output_path = '~/.config/hypr/hyprlock/colors.conf'
+
+[templates.fuzzel]
+input_path = '~/.config/quickshell/nothing/matugen/templates/fuzzel.ini'
+output_path = '~/.local/state/nothing/fuzzel-colors.ini'
+
+[templates.vicinae]
+input_path = '~/.config/quickshell/nothing/matugen/templates/vicinae.toml'
+output_path = '~/.local/share/vicinae/themes/nothing.toml'

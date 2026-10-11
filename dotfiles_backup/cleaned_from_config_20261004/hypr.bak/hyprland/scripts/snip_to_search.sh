@@ -1,0 +1,1 @@
+/home/kmv22/Everything-dots/config/hypr/hyprland/scripts/snip_to_search.sh

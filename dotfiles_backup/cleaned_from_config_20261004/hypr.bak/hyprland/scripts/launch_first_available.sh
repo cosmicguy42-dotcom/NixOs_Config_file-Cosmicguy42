@@ -1,0 +1,1 @@
+/home/kmv22/Everything-dots/config/hypr/hyprland/scripts/launch_first_available.sh

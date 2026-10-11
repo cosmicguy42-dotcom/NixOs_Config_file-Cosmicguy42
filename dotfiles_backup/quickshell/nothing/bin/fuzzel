@@ -1,0 +1,4 @@
+#!/bin/sh
+# Hyprland puts this dir first on PATH so every fuzzel call (keybinds,
+# emoji picker, clipboard) gets the wallpaper-themed config.
+exec /usr/bin/fuzzel --config "${XDG_STATE_HOME:-$HOME/.local/state}/nothing/fuzzel.ini" "$@"
