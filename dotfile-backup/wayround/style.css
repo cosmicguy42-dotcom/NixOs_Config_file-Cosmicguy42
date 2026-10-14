@@ -1,0 +1,157 @@
+* {
+  font-family: "JetBrainsMono Nerd Font";
+  font-size: 14.5px;
+  min-height: 0;
+  border: none;
+  border-radius: 0;
+}
+
+/* Barre principale */
+/*window#waybar {
+  color: #cdd6f4; 
+  color: transparent;
+}*/
+
+window#waybar {
+  /* Fond de la barre (ici un gris foncé avec 80% d'opacité) */
+  background-color: rgba(30, 30, 46, 0.99);
+
+  /* Contours arrondis */
+  border-radius: 16px;
+
+  /* Optionnel : ajoute une fine bordure pour bien délimiter la barre */
+  border: 2px solid rgba(137, 180, 250, 0.3);
+}
+
+/* Si vous avez des modules collés aux bords, vous devrez peut-être arrondir aussi leurs extrémités */
+.modules-left {
+  padding-left: 10px;
+}
+.modules-right {
+  padding-right: 10px;
+}
+
+/* Espaces de travail */
+#workspaces {
+  background-color: transparent;
+}
+
+#workspaces button {
+  color: #6c7086;
+  padding: 0 6px;
+  margin: 0 2px;
+  transition: all 0.2s ease;
+}
+
+#workspaces button:hover {
+  background-color: #313244;
+  color: #cdd6f4;
+}
+
+#workspaces button.active,
+#workspaces button.focused {
+  color: #cba6f7;
+}
+
+#workspaces button.urgent {
+  background-color: #f38ba8;
+  color: #11111b;
+}
+
+/* Titre de la fenêtre active */
+#window {
+  padding: 0 12px;
+  color: #bac2de;
+}
+
+/* Modules individuels avec couleurs d'accentuation Catppuccin Mocha */
+#clock {
+  color: #89b4fa;
+  padding: 5px 10px;
+  font-weight: bold;
+}
+
+#battery {
+  color: #a6e3a1;
+  padding: 5px 10px;
+}
+
+#battery.charging,
+#battery.plugged {
+  color: #89dceb;
+}
+
+#battery.warning:not(.charging) {
+  color: #f9e2af;
+}
+
+#battery.critical:not(.charging) {
+  color: #f38ba8;
+}
+
+#pulseaudio {
+  color: #fab387;
+  padding: 5px 10px;
+}
+
+#network {
+  color: #94e2d5;
+  padding: 5px 10px;
+}
+
+#memory {
+  color: #b4befe;
+  padding: 5px 10px;
+}
+
+#tray {
+  color: #cdd6f4;
+  padding: 5px 10px;
+}
+
+#bluetooth {
+  color: #89b4fa;
+  padding: 5px 5px;
+}
+
+#custom-power {
+  color: #f38ba8;
+  padding: 1px 12px;
+  font-size: 17px;
+  border-radius: 50px;
+}
+
+/* Info-bulles (Tooltips) */
+tooltip {
+  background-color: #181825;
+  border: 1px solid #313244;
+  border-radius: 8px;
+}
+
+tooltip label {
+  color: #cdd6f4;
+  padding: 6px;
+}
+
+/* Curseur de volume PulseAudio */
+#pulseaudio-slider slider {
+  min-height: 0px;
+  min-width: 0px;
+  border-radius: 100%;
+  background-image: none;
+  border: none;
+  box-shadow: none;
+}
+
+#pulseaudio-slider trough {
+  min-height: 8px;
+  min-width: 75px;
+  border-radius: 5px;
+  background: #313244;
+}
+
+#pulseaudio-slider highlight {
+  min-width: 10px;
+  border-radius: 5px;
+  background: #cba6f7;
+}
