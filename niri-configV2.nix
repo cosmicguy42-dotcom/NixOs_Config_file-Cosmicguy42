@@ -180,7 +180,24 @@ in
   };
 
   # Hint Electron and Chromium apps to use Wayland natively
-  environment.sessionVariables.NIXOS_OZONE_WL = "1";
+  environment.sessionVariables = {
+    NIXOS_OZONE_WL = "1";
+    DEFAULT_BROWSER = "${pkgs.librewolf}/bin/librewolf";
+  };
+
+  # Default browser associations
+  xdg.mime = {
+    enable = true;
+    defaultApplications = {
+      "text/html" = "librewolf.desktop";
+      "text/xml" = "librewolf.desktop";
+      "application/xhtml+xml" = "librewolf.desktop";
+      "x-scheme-handler/http" = "librewolf.desktop";
+      "x-scheme-handler/https" = "librewolf.desktop";
+      "x-scheme-handler/about" = "librewolf.desktop";
+      "x-scheme-handler/unknown" = "librewolf.desktop";
+    };
+  };
 
   # SDDM Display / Login Manager
   services.displayManager.sddm = {

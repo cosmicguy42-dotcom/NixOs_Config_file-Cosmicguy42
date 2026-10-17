@@ -1,6 +1,7 @@
 * {
   font-family: "JetBrainsMono Nerd Font";
-  font-size: 14.5px;
+  /*font-family: "Iosevka Nerd Font"; */
+  font-size: 13px;
   min-height: 0;
   border: none;
   border-radius: 0;
@@ -8,64 +9,66 @@
 
 /* Barre principale */
 window#waybar {
-  color: #c0caf5;
-  background-color: #1e1e2e;
-  /* background-color: black; */
+  color: #ffffff;
+  background-color: #181825;
 }
 
 /* Espaces de travail */
 
-/*#workspaces button {
-  background-color: black;
-}*/
+#workspaces button {
+  background-color: #1e1e2e;
+  font-size: 13;
+}
 
 #workspaces button:hover {
-  background-color: rgba(255, 255, 255, 0.05);
-  color: #e2e8f0;
+  background-color: rgba(255, 255, 255, 0.15);
+  color: #ffffff;
 }
 
 #workspaces button.active,
 #workspaces button.focused {
-  color: #cba6f7;
-  background-color: rgba(122, 162, 247, 0.1);
-  border-bottom: 2px solid #cba6f7;
+  color: black;
+  background-color: #cdd6f4;
+  border-bottom: 2px solid #cdd6f4;
 }
 
 #workspaces button.urgent {
-  background-color: #f7768e;
-  color: #ffffff;
+  background-color: #cdd6f4;
+  color: #000000;
 }
 
 /* Titre de la fenêtre active */
 #window {
   padding: 0 12px;
-  color: #a0aec0;
+  color: #aaaaaa;
 }
 
 /* Horloge (Centre) */
 #clock {
-  color: #cba6f7;
+  color: #cdd6f4;
   padding: 5px 10px;
+  font-size: 16;
 }
 
 /* Modules de droite (couleurs de la waybar actuelle) */
+
 #battery {
-  color: #a6e3a1;
+  color: #cdd6f4;
   padding: 5px 10px;
 }
 
 #pulseaudio {
-  color: #fab387;
+  color: #cdd6f4;
   padding: 5px 10px;
 }
 
 #network {
-  color: #94e2d5;
+  color: #cdd6f4;
   padding: 5px 10px;
 }
 
 #memory {
-  color: #b4befe;
+  color: #cdd6f4;
   padding: 5px 10px;
 }
 
@@ -75,48 +78,41 @@ window#waybar {
 }
 
 #bluetooth {
-  color: #89b4fa;
+  color: #cdd6f4;
   padding: 5px 5px;
 }
 
 #custom-power {
-  color: #f38ba8;
+  color: #cdd6f4;
   padding: 1px 12px;
   font-size: 17px;
-  border-radius: 50px;
-}
-
-/* =========================WORKSPACE============================*/
-/* Le conteneur (la boîte principale autour de tous les numéros) */
-#workspaces {
-  background-color: #1e1e2e; /* Fond sombre */
-  margin: 5px 6px;
 }
 
 /* =========================BATTERY============================*/
 
 #battery.charging,
 #battery.plugged {
-  color: #89dceb;
+  color: #cccccc;
 }
 
 #battery.warning:not(.charging) {
-  color: #f9e2af;
+  color: #aaaaaa;
 }
 
 #battery.critical:not(.charging) {
-  color: #f38ba8;
+  color: #000000;
+  background-color: #cdd6f4;
 }
 
 /* Info-bulles (Tooltips) */
 tooltip {
-  background-color: #1a1b26;
-  border: 1px solid rgba(255, 255, 255, 0.1);
+  background-color: #000000;
+  border: 1px solid rgba(255, 255, 255, 0.3);
   border-radius: 4px;
 }
 
 tooltip label {
-  color: #cba6f7;
+  color: #cdd6f4;
   padding: 4px;
 }
 
@@ -133,11 +129,11 @@ tooltip label {
   min-height: 8px;
   min-width: 75px;
   border-radius: 5px;
-  background: #313244;
+  background: #333333;
 }
 
 #pulseaudio-slider highlight {
   min-width: 10px;
   border-radius: 5px;
-  background: #cba6f7;
+  background: #cdd6f4;
 }

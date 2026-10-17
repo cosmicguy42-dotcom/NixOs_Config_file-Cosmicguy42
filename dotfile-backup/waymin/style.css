@@ -1,0 +1,137 @@
+* {
+  font-family: "JetBrainsMono Nerd Font";
+  /*font-family: "Iosevka Nerd Font"; */
+  font-size: 13px;
+  min-height: 0;
+  border: none;
+  border-radius: 0;
+}
+
+/* Barre principale */
+window#waybar {
+  color: #ffffff;
+  background-color: #181825;
+}
+
+/* Espaces de travail */
+
+#workspaces button {
+  background-color: #1e1e2e;
+  font-size: 13;
+}
+
+#workspaces button:hover {
+  background-color: rgba(255, 255, 255, 0.15);
+  color: #ffffff;
+}
+
+#workspaces button.active,
+#workspaces button.focused {
+  border-bottom: 2px solid #cdd6f4;
+}
+
+#workspaces button.urgent {
+  background-color: #cdd6f4;
+  color: #000000;
+}
+
+/* Titre de la fenêtre active */
+#window {
+  padding: 0 12px;
+  color: #aaaaaa;
+}
+
+/* Horloge (Centre) */
+#clock {
+  color: #cdd6f4;
+  padding: 5px 10px;
+  font-size: 16;
+}
+
+/* Modules de droite (couleurs de la waybar actuelle) */
+
+#battery {
+  color: #cdd6f4;
+  padding: 5px 10px;
+}
+
+#pulseaudio {
+  color: #cdd6f4;
+  padding: 5px 10px;
+}
+
+#network {
+  color: #cdd6f4;
+  padding: 5px 10px;
+}
+
+#memory {
+  color: #cdd6f4;
+  padding: 5px 10px;
+}
+
+#tray {
+  color: #cdd6f4;
+  padding: 5px 10px;
+}
+
+#bluetooth {
+  color: #cdd6f4;
+  padding: 5px 5px;
+}
+
+#custom-power {
+  color: #cdd6f4;
+  padding: 1px 12px;
+  font-size: 17px;
+}
+
+/* =========================BATTERY============================*/
+
+#battery.charging,
+#battery.plugged {
+  color: #cccccc;
+}
+
+#battery.warning:not(.charging) {
+  color: #aaaaaa;
+}
+
+#battery.critical:not(.charging) {
+  color: #000000;
+  background-color: #cdd6f4;
+}
+
+/* Info-bulles (Tooltips) */
+tooltip {
+  background-color: #000000;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  border-radius: 4px;
+}
+
+tooltip label {
+  color: #cdd6f4;
+  padding: 4px;
+}
+
+#pulseaudio-slider slider {
+  min-height: 0px;
+  min-width: 0px;
+  border-radius: 100%;
+  background-image: none;
+  border: none;
+  box-shadow: none;
+}
+
+#pulseaudio-slider trough {
+  min-height: 8px;
+  min-width: 75px;
+  border-radius: 5px;
+  background: #333333;
+}
+
+#pulseaudio-slider highlight {
+  min-width: 10px;
+  border-radius: 5px;
+  background: #cdd6f4;
+}

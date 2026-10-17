@@ -1,0 +1,102 @@
+{
+    "layer": "top",
+    "position": "top",
+    "height": 12,
+
+    "modules-left": ["niri/workspaces", "hyprland/workspaces"],
+    "modules-center": ["clock"],
+    "modules-right": [
+      "network",
+      "memory",
+      "bluetooth",
+      "pulseaudio", //"pulseaudio/slider", 
+      "battery",
+      "custom/power"
+    ],
+
+    "niri/workspaces": {
+        "format": "[ {value} ]",
+        "all-outputs": true
+    },
+
+    "hyprland/workspaces": {
+        "format": "{icon}",
+        "format-icons": {
+          "urgent": ""
+        },
+        "disable-scroll": true,
+        "all-outputs": true
+    },
+
+    "hyprland/window": {
+        "max-length": 50
+    },
+    
+    "battery": {
+        "format": "{capacity}% {icon} ",
+        "format-icons": ["", "", "", "", ""]
+    },
+    
+    "clock": {
+        "format": "{:%H:%M}",
+        "format-alt": "{:%a, %d %b %H:%M}"
+    },
+
+    "pulseaudio": {
+	    "format": "{icon} {volume}%",
+	    "format-bluetooth": "{volume}% ",
+	    "format-muted": "",
+	    "format-icons": {
+		    "alsa_output.pci-0000_00_1f.3.analog-stereo": "",
+		    "alsa_output.pci-0000_00_1f.3.analog-stereo-muted": "",
+		    "headphone": "",
+		    "default": ["", ""]
+	    },
+	    "scroll-step": 1,
+	    "on-click": "pavucontrol"
+    },
+
+    "pulseaudio/slider": {
+        "min": 0,
+        "max": 100,
+        "orientation": "horizontal"
+    },
+
+    "network": {
+	    "format": "{ifname}",
+	    "format-wifi": "{essid} ({signalStrength}%) ",
+	    "format-ethernet": "{ifname} ",
+	    "format-disconnected": "󰖪",
+	    "tooltip-format": "{ifname}",
+	    "tooltip-format-wifi": "{essid} ({signalStrength}%) ",
+	    "tooltip-format-ethernet": "{ifname} ",
+	    "tooltip-format-disconnected": "Disconnected",
+	    "max-length": 50
+    },
+
+    "bluetooth": {
+	  "format": "󰂲",
+	  "format-connected": "",
+	  // "format-device-preference": [ "device1", "device2" ], // preference list deciding the displayed device
+	  "tooltip-format": "{controller_alias}\t{controller_address}\n\n{num_connections} connected",
+	  "tooltip-format-connected": "\t\n\n{num_connections} connected\n\n{device_enumerate}",
+	  "tooltip-format-enumerate-connected": "{device_address}",
+	  "tooltip-format-enumerate-connected-battery": "{device_address}",
+  
+    "on-click": "blueman-manager"
+  },
+
+  "memory": {
+	  "interval": 1,
+	  "format": "MEM {}%",
+	  "max-length": 10
+  },
+
+
+  "custom/power": {
+    "format": " ",
+    "tooltip": false,
+    "on-click": "wlogout -c 0 -r 0 --protocol layer-shell"
+}
+
+}
