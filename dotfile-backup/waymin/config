@@ -99,7 +99,7 @@
 
 
   "custom/power": {
-    "format": " ",
+    "format": " ",
     "tooltip": false,
     "on-click": "wlogout -c 0 -r 0 --protocol layer-shell"
 }

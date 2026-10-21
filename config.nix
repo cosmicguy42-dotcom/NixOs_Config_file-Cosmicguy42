@@ -1,28 +1,24 @@
 # ==============================================================================
-# NixOS Configuration: hyperland-configV3-NixOS.nix
-# Description: Complete standalone NixOS configuration featuring:
-#              - Hyprland Wayland Compositor & ecosystem (Waybar, Rofi, Kitty, Dunst)
-#              - Essential CLI tools & utilities (Git, curl, wget, ripgrep, etc.)
-#              - Neovim (default editor) & VSCodium (Vim removed)
-#              - Zen Browser, LibreWolf & Firefox
-#              - Hybrid Graphics Acceleration (Intel Alder Lake + NVIDIA RTX 3050)
+# NixOS Main Configuration: config.nix
+# Modular setup importing ./package.nix
 # ==============================================================================
 
-{ config, lib, pkgs, modulesPath, inputs ? null, ... }:
+{
+  config,
+  lib,
+  pkgs,
+  modulesPath,
+  inputs ? null,
+  ...
+}:
 
-let
-  # Zen Browser package from flake input if provided, otherwise fetchTarball
-  zen-browser-pkg =
-    if inputs != null && inputs ? zen-browser
-    then inputs.zen-browser.packages.${pkgs.stdenv.hostPlatform.system}.default
-    else (import (builtins.fetchTarball "https://github.com/0xc000022070/zen-browser-flake/archive/main.tar.gz") {
-      inherit pkgs;
-    }).default;
-in
 {
   imports = [
     # Automatically detected hardware modules (do not remove)
     (modulesPath + "/installer/scan/not-detected.nix")
+
+    # Modular package list
+    ./package.nix
   ];
 
   # Provide default for inputs so this file can be built both with and without Flakes
@@ -31,7 +27,14 @@ in
   # ----------------------------------------------------------------------------
   # 1. Hardware & Kernel Configuration
   # ----------------------------------------------------------------------------
-  boot.initrd.availableKernelModules = [ "xhci_pci" "ahci" "nvme" "usbhid" "usb_storage" "sd_mod" ];
+  boot.initrd.availableKernelModules = [
+    "xhci_pci"
+    "ahci"
+    "nvme"
+    "usbhid"
+    "usb_storage"
+    "sd_mod"
+  ];
   boot.initrd.kernelModules = [ ];
   boot.kernelModules = [ "kvm-intel" ];
   boot.extraModulePackages = [ ];
@@ -46,7 +49,24 @@ in
   fileSystems."/boot" = {
     device = "/dev/disk/by-uuid/C525-B702";
     fsType = "vfat";
-    options = [ "fmask=0077" "dmask=0077" ];
+    options = [
+      "fmask=0077"
+      "dmask=0077"
+    ];
+  };
+
+  # NAS SMB/CIFS Share
+  fileSystems."/mnt/nas" = {
+    device = "//192.168.1.177/LE_NOM_DU_PARTAGE";
+    fsType = "cifs";
+    options = [
+      "credentials=/etc/.smbcredentials"
+      "uid=1000"
+      "gid=1000"
+      "iocharset=utf8"
+      "_netdev"
+      "nofail"
+    ];
   };
 
   swapDevices = [ ];
@@ -66,13 +86,13 @@ in
     enable = true;
     enable32Bit = true;
     extraPackages = with pkgs; [
-      intel-media-driver   # Décodage matériel VA-API pour ton i5-12450H (Alder Lake)
+      intel-media-driver # Décodage matériel VA-API pour i5-12450H (Alder Lake)
       libva-vdpau-driver
       libvdpau-va-gl
     ];
   };
 
-  # Charger le pilote propriétaire NVIDIA officiel (remplace nouveau)
+  # Pilote propriétaire NVIDIA
   services.xserver.videoDrivers = [ "nvidia" ];
 
   hardware.nvidia = {
@@ -84,14 +104,12 @@ in
     package = config.boot.kernelPackages.nvidiaPackages.stable;
 
     # Mode Hybride (PRIME Offload) :
-    # - Hyprland, Zen Browser et LibreWolf tournent sur l'iGPU Intel (0 lag, 4K fluide, batterie préservée)
-    # - La RTX 3050 reste en veille et ne s'allume que si tu lances une appli avec 'nvidia-offload'
     prime = {
       offload = {
         enable = true;
         enableOffloadCmd = true;
       };
-      # Adresses PCI exactes de ta machine :
+      # Adresses PCI de la machine
       intelBusId = "PCI:0:2:0";
       nvidiaBusId = "PCI:1:0:0";
     };
@@ -101,7 +119,9 @@ in
   # 2. Bootloader (UEFI / systemd-boot)
   # ----------------------------------------------------------------------------
   boot.loader.systemd-boot.enable = true;
-  boot.loader.efi.canTouchEfiVariables = true;
+  boot.loader.systemd-boot.graceful = true;
+  boot.loader.efi.canTouchEfiVariables = false;
+  boot.loader.systemd-boot.configurationLimit = 5;
 
   # ----------------------------------------------------------------------------
   # 3. Networking
@@ -135,23 +155,38 @@ in
   console.keyMap = "fr";
 
   # ----------------------------------------------------------------------------
-  # 5. Desktop Environment: Hyprland & Display Manager
+  # 5. Desktop Environment: Niri & Display Manager
   # ----------------------------------------------------------------------------
-  # Enable Hyprland dynamic tiling Wayland compositor
-  programs.hyprland = {
+  programs.niri = {
     enable = true;
-    xwayland.enable = true;
   };
 
-  # Hint Electron and Chromium apps to use Wayland natively
-  environment.sessionVariables.NIXOS_OZONE_WL = "1";
+  # Wayland variables for Electron/Chromium and default browser
+  environment.sessionVariables = {
+    NIXOS_OZONE_WL = "1";
+    DEFAULT_BROWSER = "${pkgs.librewolf}/bin/librewolf";
+  };
+
+  # Default browser associations
+  xdg.mime = {
+    enable = true;
+    defaultApplications = {
+      "text/html" = "librewolf.desktop";
+      "text/xml" = "librewolf.desktop";
+      "application/xhtml+xml" = "librewolf.desktop";
+      "x-scheme-handler/http" = "librewolf.desktop";
+      "x-scheme-handler/https" = "librewolf.desktop";
+      "x-scheme-handler/about" = "librewolf.desktop";
+      "x-scheme-handler/unknown" = "librewolf.desktop";
+    };
+  };
 
   # SDDM Display / Login Manager
   services.displayManager.sddm = {
     enable = true;
     wayland.enable = true;
   };
-  services.displayManager.defaultSession = "hyprland";
+  services.displayManager.defaultSession = "niri";
 
   # Bluetooth management GUI service (blueman-applet)
   services.blueman.enable = true;
@@ -159,10 +194,13 @@ in
   # Security / Polkit authentication
   security.polkit.enable = true;
 
-  # XDG Portals (ensures file picker & desktop integration work in Wayland apps)
+  # XDG Portals
   xdg.portal = {
     enable = true;
-    extraPortals = [ pkgs.xdg-desktop-portal-gtk ];
+    extraPortals = [
+      pkgs.xdg-desktop-portal-gtk
+      pkgs.xdg-desktop-portal-gnome
+    ];
   };
 
   # Flatpak support
@@ -187,14 +225,22 @@ in
   users.users."kmv22" = {
     isNormalUser = true;
     description = "KMV22";
-    extraGroups = [ "networkmanager" "wheel" ];
+    extraGroups = [
+      "networkmanager"
+      "wheel"
+      "docker"
+    ];
+    shell = pkgs.fish;
   };
 
   # ----------------------------------------------------------------------------
   # 8. Nix & Package Management Settings
   # ----------------------------------------------------------------------------
   nixpkgs.config.allowUnfree = true;
-  nix.settings.experimental-features = [ "nix-command" "flakes" ];
+  nix.settings.experimental-features = [
+    "nix-command"
+    "flakes"
+  ];
   programs.nix-ld.enable = true;
   environment.localBinInPath = true;
 
@@ -209,72 +255,12 @@ in
   };
 
   # ----------------------------------------------------------------------------
-  # 10. System Packages
+  # 10. Additional System Services
   # ----------------------------------------------------------------------------
-  environment.systemPackages = with pkgs; [
-    # --- Web Browsers ---
-    librewolf
-    zen-browser-pkg    
-
-    # --- cool things ---
-    spotify    
-    gcc
-    python3
-    cargo
-    nmap
-    wireshark
-    qbittorrent
-    
-    # --- Code & Text Editors ---
-    neovim
-    vscodium
-
-    # --- Version Control ---
-    git
-
-    # --- Hyprland Desktop Ecosystem ---
-    kitty                    # Default terminal for Hyprland
-    waybar                   # Highly customizable Wayland top/bottom bar
-    rofi                     # Modern application launcher & window switcher
-    wofi                     # Alternative Wayland app launcher
-    dunst                    # Lightweight notification daemon
-    libnotify                # Notification sender tool (notify-send)
-    swaybg                   # Wayland wallpaper manager
-    hyprpaper                # Hyprland native wallpaper utility
-    hyprlock                 # Fast, modern screen locker for Hyprland
-    hypridle                 # Idle daemon for auto-sleep / auto-lock
-    wl-clipboard             # Wayland CLI clipboard utilities (wl-copy, wl-paste)
-    grim                     # Screenshot tool for Wayland
-    slurp                    # Interactive region selection tool (works with grim)
-    pavucontrol              # Volume control GUI
-    brightnessctl            # Display brightness control tool
-    pamixer                  # PipeWire / PulseAudio volume CLI for keybindings
-    playerctl                # Media player controller for media keys
-    networkmanagerapplet     # NetworkManager systray applet (nm-applet)
-    kdePackages.polkit-kde-agent-1 # Polkit authentication GUI agent
-    swaylock-effects
-
-    # --- GUI Utilities & File Management ---
-    kdePackages.dolphin      # Rich graphical file manager
-    kdePackages.ark          # Archive manager
-    qimgv                    # Image Viewer
-
-    # --- Essential Command-Line Utilities ---
-    curl
-    wget
-    tree
-    ripgrep
-    fd
-    jq
-    which
-
-    file
-    unzip
-    zip
-    htop
-    btop
-    fastfetch
-  ];
+  virtualisation.docker.enable = true;
+  services.udisks2.enable = true;
+  services.upower.enable = true;
+  programs.fish.enable = true;
 
   # ----------------------------------------------------------------------------
   # 11. Fonts (Nerd Fonts & Icons for Waybar, Kitty, Neovim)
