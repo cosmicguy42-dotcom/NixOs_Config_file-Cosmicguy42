@@ -1,7 +1,6 @@
 * {
   font-family: "JetBrainsMono Nerd Font";
   /*font-family: "Iosevka Nerd Font"; */
-  font-size: 13px;
   min-height: 0;
   border: none;
   border-radius: 0;
@@ -15,9 +14,20 @@ window#waybar {
 
 /* Espaces de travail */
 
+
+#window,
+#memory,
+#battery,
+#pulseaudio,
+#network {
+  font-size: 13px; 
+}
+
+
+
 #workspaces button {
   background-color: #1e1e2e;
-  font-size: 13;
+  font-size: 14;
 }
 
 #workspaces button:hover {
@@ -45,7 +55,7 @@ window#waybar {
 #clock {
   color: #cdd6f4;
   padding: 5px 10px;
-  font-size: 16;
+  font-size: 14.5px; 
 }
 
 /* Modules de droite (couleurs de la waybar actuelle) */
@@ -73,20 +83,22 @@ window#waybar {
 #tray {
   color: #cdd6f4;
   padding: 5px 10px;
+  font-size: 13px; 
 }
 
 #bluetooth {
   color: #cdd6f4;
   padding: 5px 5px;
+  font-size: 13px; 
 }
 
 #custom-power {
   color: #cdd6f4;
-  padding: 1px 12px;
-  font-size: 22px;
+  font-size: 24px;
 }
 
 /* =========================BATTERY============================*/
+
 
 #battery.charging,
 #battery.plugged {

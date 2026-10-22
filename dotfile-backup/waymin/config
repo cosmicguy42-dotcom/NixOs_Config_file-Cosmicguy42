@@ -1,9 +1,9 @@
 {
     "layer": "top",
     "position": "top",
-    "height": 13,
+    "height": 12,
 
-    "modules-left": ["niri/workspaces", "hyprland/workspaces"],
+    "modules-left": ["niri/workspaces", "hyprland/workspaces", "custom/text"],
     "modules-center": ["clock"],
     "modules-right": [
       "network",
@@ -15,7 +15,7 @@
     ],
 
     "niri/workspaces": {
-        "format": "[ {value} ]",
+        "format": "{value}",
         "all-outputs": true
     },
 
@@ -31,7 +31,12 @@
     "hyprland/window": {
         "max-length": 50
     },
-    
+
+    "custom/text": {
+        "format": "(⸝⸝⩌ ⤙ ⩌⸝⸝)",
+        "tooltip": false
+    },
+
     "battery": {
         "format": "{capacity}% {icon} ",
         "format-icons": ["", "", "", "", ""],
@@ -40,7 +45,8 @@
     
     "clock": {
         "format": "{:%H:%M}",
-        "format-alt": "{:%a, %d %b %H:%M}"
+        "format-alt": "{:%a, %d %b %H:%M}",
+        "tooltip": false
     },
 
     "pulseaudio": {
