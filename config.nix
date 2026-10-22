@@ -55,22 +55,6 @@
     ];
   };
 
-  # NAS SMB/CIFS Share
-  fileSystems."/mnt/nas" = {
-    device = "//192.168.1.177/LE_NOM_DU_PARTAGE";
-    fsType = "cifs";
-    options = [
-      "x-systemd.automount"
-      "noauto"
-      "x-systemd.idle-timeout=60"
-      "credentials=/etc/.smbcredentials"
-      "uid=1000"
-      "gid=1000"
-      "iocharset=utf8"
-      "_netdev"
-      "nofail"
-    ];
-  };
 
   swapDevices = [ ];
   zramSwap.enable = true;
