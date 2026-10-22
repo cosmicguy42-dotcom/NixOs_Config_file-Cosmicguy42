@@ -1,39 +1,33 @@
 {
-  description = "NixOS Configuration with Hyprland and Ryoku Desktop";
+  description = "NixOS configuration flake for Cosmicguy42";
 
   inputs = {
+    # Dépôt principal de paquets NixOS (branche unstable)
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
 
-    ryoku = {
-      url = "github:aethctl/Ryoku-on-NixOS";
-    };
-
+    # Navigateur Zen Browser
     zen-browser = {
       url = "github:0xc000022070/zen-browser-flake";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+
+    # Navigateur Helium
+    helium = {
+      url = "github:schembriaiden/helium-browser-nix-flake";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
-  outputs = { self, nixpkgs, ryoku, zen-browser, ... }@inputs: {
-    nixosConfigurations.nixos = nixpkgs.lib.nixosSystem {
-      system = "x86_64-linux";
-      specialArgs = { inherit inputs; };
-      modules = [
-        ./hyperland-config-NixOS.nix
-        ryoku.nixosModules.default
-        {
-          nixpkgs.config.allowUnfree = true;
-          nixpkgs.config.permittedInsecurePackages = [
-            "electron-41.10.6"
-          ];
-
-          programs.ryoku = {
-            enable = true;
-            shell = "fish";
-            updateFlake = "/home/kmv22/Nix_Config";
-          };
-        }
-      ];
+  outputs = { self, nixpkgs, ... }@inputs: {
+    nixosConfigurations = {
+      # Le nom d'hôte de la machine (networking.hostName dans config.nix)
+      nixos = nixpkgs.lib.nixosSystem {
+        system = "x86_64-linux";
+        specialArgs = { inherit inputs; };
+        modules = [
+          ./config.nix
+        ];
+      };
     };
   };
 }

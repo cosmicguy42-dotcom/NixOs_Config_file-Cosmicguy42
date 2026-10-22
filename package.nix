@@ -1,25 +1,8 @@
-{ pkgs, inputs ? null, ... }:
+{ pkgs, inputs, ... }:
 
 let
-  # Zen Browser package from flake input if provided, otherwise fetchTarball
-  zen-browser-pkg =
-    if inputs != null && inputs ? zen-browser then
-      inputs.zen-browser.packages.${pkgs.stdenv.hostPlatform.system}.default
-    else
-      (import
-        (builtins.fetchTarball "https://github.com/0xc000022070/zen-browser-flake/archive/main.tar.gz")
-        {
-          inherit pkgs;
-        }
-      ).default;
-
-  # Helium Browser package from flake input if provided, otherwise getFlake
-  helium-pkg =
-    if inputs != null && inputs ? helium then
-      inputs.helium.packages.${pkgs.stdenv.hostPlatform.system}.default
-    else
-      (builtins.getFlake "github:schembriaiden/helium-browser-nix-flake").packages.${pkgs.stdenv.hostPlatform.system}.default;
-
+  zen-browser-pkg = inputs.zen-browser.packages.${pkgs.stdenv.hostPlatform.system}.default;
+  helium-pkg = inputs.helium.packages.${pkgs.stdenv.hostPlatform.system}.default;
 in
 {
   # ----------------------------------------------------------------------------
