@@ -3,7 +3,7 @@
     "position": "top",
     "height": 12,
 
-    "modules-left": ["niri/workspaces", "hyprland/workspaces", "custom/notif"],
+    "modules-left": ["niri/workspaces", "hyprland/workspaces"],
     "modules-center": ["clock"],
     "modules-right": [
       "network",
@@ -30,13 +30,6 @@
 
     "hyprland/window": {
         "max-length": 50
-    },
-
-    "custom/notif": {
-        "format": "(⸝⸝⩌ ⤙ ⩌⸝⸝)",
-        "on-click": "swaync-client -t -sw",
-        "on-click-left": "swaync-client -d -sw",
-        "tooltip": false
     },
 
     "battery": {

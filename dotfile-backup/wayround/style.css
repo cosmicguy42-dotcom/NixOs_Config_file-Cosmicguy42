@@ -1,6 +1,5 @@
 * {
   font-family: "JetBrainsMono Nerd Font";
-  font-size: 14.5px;
   min-height: 0;
   border: none;
   border-radius: 0;
@@ -32,12 +31,21 @@ window#waybar {
 }
 
 /* Espaces de travail */
+#window,
+#memory,
+#battery,
+#pulseaudio,
+#network {
+  font-size: 13px;
+}
+
 #workspaces {
   background-color: transparent;
 }
 
 #workspaces button {
   color: #6c7086;
+  font-size: 14px;
   padding: 0 6px;
   margin: 0 2px;
   transition: all 0.2s ease;
@@ -68,6 +76,7 @@ window#waybar {
 #clock {
   color: #89b4fa;
   padding: 5px 10px;
+  font-size: 14.5px;
   font-weight: bold;
 }
 
@@ -107,17 +116,18 @@ window#waybar {
 #tray {
   color: #cdd6f4;
   padding: 5px 10px;
+  font-size: 13px;
 }
 
 #bluetooth {
   color: #89b4fa;
   padding: 5px 5px;
+  font-size: 13px;
 }
 
 #custom-power {
   color: #f38ba8;
-  padding: 1px 12px;
-  font-size: 17px;
+  font-size: 24px;
   border-radius: 50px;
 }
 

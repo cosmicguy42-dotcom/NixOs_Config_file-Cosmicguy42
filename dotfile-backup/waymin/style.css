@@ -28,6 +28,8 @@ window#waybar {
 #workspaces button {
   background-color: #1e1e2e;
   font-size: 14px;
+  padding-top: 5px;
+  padding-bottom: 5px; 
 }
 
 #workspaces button:hover {
@@ -37,11 +39,12 @@ window#waybar {
 
 #workspaces button.active,
 #workspaces button.focused {
+  color: #000000;
+  background-color: #cdd6f4; 
   border-bottom: 2px solid #cdd6f4;
 }
 
 #workspaces button.urgent {
-  background-color: #cdd6f4;
   color: #000000;
 }
 
