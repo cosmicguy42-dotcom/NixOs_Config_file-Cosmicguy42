@@ -32,6 +32,7 @@
     },
 
     "clock": {
+        "locale": "en_US.UTF-8",
         "format": "{:%Y-%m-%d %H:%M:%S}",
         //"tooltip-format": "<tt>{calendar}</tt>",
         "tooltip-format": "<tt><span font='Iosevka Nerd Font' size='13pt'><b>{calendar}</b></span></tt>",

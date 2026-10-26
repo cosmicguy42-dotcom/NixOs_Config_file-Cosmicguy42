@@ -44,6 +44,7 @@
     },
     
     "clock": {
+        "locale": "en_US.UTF-8",
         "format": "{:%H:%M}",
         "format-alt": "{:%a, %d %b %H:%M}"
     },

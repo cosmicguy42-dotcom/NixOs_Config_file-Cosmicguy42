@@ -67,6 +67,10 @@ color: #e3e1e9;
 }
 
 
+#clock {
+  font-size: 15px;
+}
+
 #battery {
     background-color: alpha(@secondary, 0.20);
     border-radius: 0px;
