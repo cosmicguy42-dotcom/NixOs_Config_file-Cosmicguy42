@@ -48,6 +48,7 @@ in
 
     # --- Media, Gaming & Notes ---
     spotify
+    pkgs.termusic 
     steam
     obsidian
 
@@ -107,7 +108,6 @@ in
     # --- Networking & Packet Analysis ---
     libpcap
     wireshark
-    termshark                # Terminal UI for Wireshark/tshark
     tcpdump
     nmap
     rustscan                 # Fast port scanner in Rust
@@ -135,7 +135,11 @@ in
     lazygit
     git
 
+    dwm
+
     # --- Hypr Desktop Ecosystem ---
+    noctalia-shell-pkg
+    quickshell
     hyprpicker
     xwayland-satellite       # XWayland outside-of-process bridge for Niri
     fuzzel                   # Minimalist Wayland application launcher

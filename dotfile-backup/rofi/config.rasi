@@ -1,0 +1,177 @@
+/**
+ * Minimalist Rofi Configuration
+ * Fichier prêt pour le ricing : variables de couleurs et dimensions éditables en haut.
+ **/
+
+configuration {
+    modi:                       "drun,run,filebrowser,window";
+    show-icons:                 true;
+    display-drun:               "アプリ";
+    display-run:                "逃げろ";
+    display-filebrowser:        "ファイル";
+    display-window:             "ディスプレイ";
+    drun-display-format:        "{name}";
+    window-format:              "{w} · {c} · {t}";
+    font:                       "JetBrainsMono Nerd Font 10";
+    icon-theme:                 "Papirus";
+    disable-history:            false;
+    click-to-exit:              true;
+    drun-use-desktop-cache:     true;
+}
+
+/* ===================================================================
+ * Variables de Couleurs & Ricing
+ * Tu peux importer "colors.rasi" ou ajuster les valeurs ci-dessous :
+ * =================================================================== */
+* {
+    /* Couleurs principales - BlackMetal (Dark Metal) */
+    bg:                         #000000;
+    bg-alt:                     #121212;
+    surface:                    rgba(18, 18, 18, 0.90);
+    fg:                         #c1c1c1;
+    fg-muted:                   #666666;
+    accent:                     #ffffff;
+    accent-hover:               rgba(255, 255, 255, 0.12);
+    border-col:                 #333333;
+
+    /* Rétro-compatibilité / alias */
+    foreground:                 @fg;
+    border-color:               @border-col;
+
+    /* Typographie & défauts */
+    font:                       "JetBrainsMono Nerd Font 10";
+    background-color:           transparent;
+    text-color:                 @fg;
+}
+
+/* ===================================================================
+ * Fenêtre
+ * =================================================================== */
+window {
+/*    transparency:               "real"; */
+    location:                   center;
+    anchor:                     center;
+    width:                      520px;
+    x-offset:                   0px;
+    y-offset:                   0px;
+    enabled:                    true;
+    border:                     1px solid;
+    border-color:               @border-color;
+    border-radius:              0px;
+    background-color:           @bg;
+    cursor:                     "default";
+}
+
+/* ===================================================================
+ * Conteneur principal
+ * =================================================================== */
+mainbox {
+    enabled:                    true;
+    spacing:                    12px;
+    padding:                    16px;
+    orientation:                vertical;
+    children:                   [ "inputbar", "listview" ];
+}
+
+/* ===================================================================
+ * Barre d'entrée / Recherche
+ * =================================================================== */
+inputbar {
+    enabled:                    true;
+    spacing:                    10px;
+    padding:                    10px 14px;
+    border-radius:              0px;
+    background-color:           @bg-alt;
+    text-color:                 @fg;
+    children:                   [ "prompt", "entry" ];
+}
+
+prompt {
+    enabled:                    true;
+    background-color:           transparent;
+    text-color:                 @accent;
+    font:                       "JetBrainsMono Nerd Font 11";
+}
+
+entry {
+    enabled:                    true;
+    background-color:           transparent;
+    text-color:                 @fg;
+    cursor:                     text;
+    placeholder:                "Search";
+    placeholder-color:          @fg-muted;
+}
+
+/* ===================================================================
+ * Liste des résultats
+ * =================================================================== */
+listview {
+    enabled:                    true;
+    columns:                    1;
+    lines:                      7;
+    cycle:                      true;
+    dynamic:                    true;
+    scrollbar:                  false;
+    layout:                     vertical;
+    reverse:                    false;
+    fixed-height:               true;
+    fixed-columns:              true;
+    spacing:                    6px;
+    padding:                    4px 0px 0px 0px;
+    background-color:           transparent;
+}
+
+/* ===================================================================
+ * Éléments individuels
+ * =================================================================== */
+element {
+    enabled:                    true;
+    spacing:                    12px;
+    padding:                    8px 12px;
+    border-radius:              0px;
+    background-color:           transparent;
+    text-color:                 @fg;
+    cursor:                     pointer;
+    orientation:                horizontal;
+}
+
+element normal.normal {
+    background-color:           transparent;
+    text-color:                 @fg;
+}
+
+element selected.normal {
+    background-color:           @accent-hover;
+    text-color:                 @accent;
+    border:                     1px solid;
+    border-color:               @accent;
+}
+
+element alternate.normal {
+    background-color:           transparent;
+    text-color:                 @fg;
+}
+
+element-icon {
+    background-color:           transparent;
+    size:                       24px;
+    cursor:                     inherit;
+}
+
+element-text {
+    background-color:           transparent;
+    text-color:                 inherit;
+    cursor:                     inherit;
+    vertical-align:             0.5;
+    horizontal-align:           0.0;
+}
+
+/* ===================================================================
+ * Messages d'erreur
+ * =================================================================== */
+error-message {
+    padding:                    15px;
+    border-radius:              0px;
+    background-color:           @bg;
+    text-color:                 @fg;
+}

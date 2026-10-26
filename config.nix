@@ -138,7 +138,6 @@
     LC_TIME = "fr_FR.UTF-8";
   };
 
-  # Keyboard layout (French AZERTY)
   services.xserver.xkb = {
     layout = "fr";
     variant = "";
@@ -148,11 +147,11 @@
   # ----------------------------------------------------------------------------
   # 5. Desktop Environment: Niri & Display Manager
   # ----------------------------------------------------------------------------
-  programs.hyprland= {
+  programs.niri= {
     enable = true;
   };
-  programs.niri = {
-    enable = false;
+  programs.hyprland = {
+    enable = true;
   };
 
   # Wayland variables for Electron/Chromium and default browser
@@ -183,7 +182,7 @@
     theme = "sddm-astronaut-theme";
     extraPackages = [ pkgs.sddm-astronaut ];
   };
-  services.displayManager.defaultSession = "hyprland";
+  services.displayManager.defaultSession = "niri";
 
   # Bluetooth management GUI service (blueman-applet)
   services.blueman.enable = true;
@@ -318,6 +317,17 @@
   services.udisks2.enable = true;
   services.upower.enable = true;
   programs.fish.enable = true;
+
+  #Automatic updating
+  system.autoUpgrade.enable = true;
+  system.autoUpgrade.dates = "weekly";
+
+  #Automatic cleanup
+  nix.gc.automatic = true;
+  nix.gc.dates = "daily";
+  nix.gc.options = "--delete-older-than 10d";
+  nix.settings.auto-optimise-store = true;
+
 
   # ----------------------------------------------------------------------------
   # 11. Fonts (Nerd Fonts & Icons for Waybar, Kitty, Neovim)

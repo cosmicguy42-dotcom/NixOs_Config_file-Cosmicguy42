@@ -6,11 +6,10 @@
   border-radius: 0;
 }
 
-/* Barre principale */
+/* Barre principale (Thème Wallpaper Monochrome Lain : Noir pur & Blanc pur) */
 window#waybar {
   color: #ffffff;
-  /*background-color: #101212; */
-  background-color: #1a1a1a;
+  background-color: #000000;
 }
 
 #window,
@@ -23,19 +22,14 @@ window#waybar {
 
 /* Espaces de travail */
 
-/*#workspaces button {
-  background-color: black;
-}*/
-
 #workspaces button {
-  background-color: #262525; /*#101212; */
-  font-size: 14;
-  padding-top: 5px;
-  padding-bottom: 5px;
+  color: #ffffff;
+  font-size: 13px;
+  padding: 1px 8px;
 }
 
 #workspaces button:hover {
-  background-color: rgba(255, 255, 255, 0.15);
+  background-color: rgba(255, 255, 255, 0.2);
   color: #ffffff;
 }
 
@@ -43,7 +37,6 @@ window#waybar {
 #workspaces button.focused {
   color: #000000;
   background-color: #ffffff;
-  border-bottom: 2px solid #ffffff;
 }
 
 #workspaces button.urgent {
@@ -54,17 +47,17 @@ window#waybar {
 /* Titre de la fenêtre active */
 #window {
   padding: 0 12px;
-  color: #aaaaaa;
+  color: #b0b0b0;
 }
 
 /* Horloge (Centre) */
 #clock {
   color: #ffffff;
   padding: 5px 10px;
-  font-size: 14.5px;
+  font-size: 14.25px;
 }
 
-/* Modules de droite (couleurs de la waybar actuelle) */
+/* Modules de droite (Noir & Blanc pur) */
 
 #battery {
   color: #ffffff;
@@ -100,14 +93,18 @@ window#waybar {
 
 #custom-power {
   color: #ffffff;
-  font-size: 24px;
+  font-size: 22px;
+}
+
+#custom-notif {
+  background-color: #0f0f0f;
 }
 
 /* =========================BATTERY============================*/
 
 #battery.charging,
 #battery.plugged {
-  color: #cccccc;
+  color: #ffffff;
 }
 
 #battery.warning:not(.charging) {
@@ -122,8 +119,8 @@ window#waybar {
 /* Info-bulles (Tooltips) */
 tooltip {
   background-color: #000000;
-  border: 1px solid rgba(255, 255, 255, 0.3);
-  border-radius: 4px;
+  border: 1px solid #ffffff;
+  border-radius: 0px;
 }
 
 tooltip label {
@@ -134,7 +131,7 @@ tooltip label {
 #pulseaudio-slider slider {
   min-height: 0px;
   min-width: 0px;
-  border-radius: 100%;
+  border-radius: 0;
   background-image: none;
   border: none;
   box-shadow: none;
@@ -143,12 +140,12 @@ tooltip label {
 #pulseaudio-slider trough {
   min-height: 8px;
   min-width: 75px;
-  border-radius: 5px;
-  background: #333333;
+  border-radius: 0px;
+  background: #222222;
 }
 
 #pulseaudio-slider highlight {
   min-width: 10px;
-  border-radius: 5px;
+  border-radius: 0px;
   background: #ffffff;
 }

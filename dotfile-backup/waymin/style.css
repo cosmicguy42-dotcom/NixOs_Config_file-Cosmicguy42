@@ -28,8 +28,8 @@ window#waybar {
 #workspaces button {
   background-color: #1e1e2e;
   font-size: 14px;
-  padding-top: 5px;
-  padding-bottom: 5px; 
+  padding: 1px 14px;
+  min-width: 0;
 }
 
 #workspaces button:hover {
@@ -151,22 +151,5 @@ tooltip label {
   min-width: 10px;
   border-radius: 5px;
   background: #cdd6f4;
-}
-
-/* ========================= ANIMATED CAT ============================ */
-@keyframes runCat {
-  to {
-    background-position: -256px 0px;
-  }
-}
-
-#custom-cat {
-  min-width: 32px;
-  min-height: 20px;
-  background-image: url("file:///home/kmv22/.config/waybar/assets/cat_sheet.png");
-  background-repeat: no-repeat;
-  background-position: 0px 0px;
-  animation: runCat 0.8s steps(8) infinite;
-  margin: 0 4px;
 }
 
