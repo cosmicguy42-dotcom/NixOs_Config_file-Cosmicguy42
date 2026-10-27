@@ -20,6 +20,9 @@ window#waybar {
     padding: 0px 0px;
 }
 
+#mpris {
+  color: #85B6FF;
+}
 
 #workspaces button {
     padding: 0px 7px;
@@ -83,7 +86,7 @@ window#waybar {
 
 #battery.charging,
 #battery.plugged {
-    color: #64de83;
+ /*   color: #64de83; */
 }
 
 #battery.warning:not(.charging) {

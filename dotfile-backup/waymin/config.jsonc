@@ -5,7 +5,8 @@
     "spacing": 8,
 
     "modules-left": [
-        "niri/workspaces"
+        "niri/workspaces",
+        "mpris"
     ],
 
     "modules-center": ["clock"],
@@ -22,7 +23,7 @@
 
     "tray": {
         "spacing": 10,
-        "icon-size": 23
+        "icon-size": 20
     },
 
     "niri/window": {
@@ -90,6 +91,22 @@
         "format-disconnected": "NET --",
         "tooltip-format": "Network Information\n\nSSID: {essid}\nIP: {ipaddr}\nBand: {frequency} MHz\nSignal: {signalStrength}%   \nvia: {ifname}",
         "tooltip-format-disconnected": "no connection"
+    },
+    "mpris": {
+        "format": "<span size='large'>{player_icon}</span> {dynamic}",
+        "format-paused": "<span size='large'>{status_icon}</span> <i>{dynamic}</i>",
+        "max-length": 50,
+        "interval": 0.5,
+        "player-icons": {
+          "default": "▶",
+          "spotify": "",
+          "termusic": "󰝚 ",
+          "mpv": "󰝚 "
+        },
+        "status-icons": {
+            "paused": "⏸"
+        },
+        "ignored-players": ["vlc"] 
     },
 
     "pulseaudio": {

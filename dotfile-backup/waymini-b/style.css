@@ -19,11 +19,14 @@ window#waybar {
     padding: 0px 0px;
 }
 
+#mpris {
+  color: #ffffFF;
+}
 
 #workspaces button {
     padding: 0px 7px;
     margin: 0px;
-    color: #e3e1e9;
+    color: #efe1e9;
     background-color: transparent;
     box-shadow: none;
 }
@@ -40,7 +43,7 @@ window#waybar {
 }
 
 #workspaces button.active {
-    background: #cbcbcb;
+    background: #fffffb;
     color: #121318;
 }
 
@@ -72,7 +75,7 @@ color: #e3e1e9;
 }
 
 #battery {
-    background-color: alpha(@secondary, 0.20);
+    background-color: alpha(#b59aeb, 0.20);
     border-radius: 0px;
     margin: 4px 0;
     padding: 0px 10px;
