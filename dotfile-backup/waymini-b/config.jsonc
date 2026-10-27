@@ -22,7 +22,7 @@
 
     "tray": {
         "spacing": 10,
-        "icon-size": 25
+        "icon-size": 23
     },
 
     "niri/window": {

@@ -1,19 +1,20 @@
 * {
-    /* Black & White Palette */
-    bg: #000000;          /* Pure Black */
-    bg-alt: #151515;      /* Dark Gray for subtle surface separation */
-    fg: #ffffff;          /* Pure White */
-    accent: #ffffff;      /* White Borders & Highlights */
-    
+    /* Thème extrait de la screenshot */
+    bg: #16171c;          /* Fond sombre */
+    bg-alt: #1e1f28;      /* Surface secondaire */
+    fg: #ced1fe;          /* Texte clair lavande */
+    accent: #8d83b7;      /* Barre de sélection lavande/violet */
+    border-col: #3f3e52;  /* Bordure subtile */
+
     background-color: transparent;
     text-color: @fg;
-    font: "monospace 12";
+    font: "Iosevka Nerd Font 12";
 }
 
 window {
     background-color: @bg;
     border: 1px solid;
-    border-color: @accent;
+    border-color: @border-col;
     border-radius: 0px; /* Sharp, square corners */
     width: 250px;
     padding: 15px;
@@ -22,7 +23,7 @@ window {
 
 mainbox {
     children: [ inputbar, listview ];
-    spacing: 15px;
+    spacing: 12px;
 }
 
 inputbar {
@@ -30,24 +31,24 @@ inputbar {
     background-color: @bg-alt;
     padding: 10px;
     border: 1px solid;
-    border-color: @accent;
-    border-radius: 0px; 
+    border-color: @border-col;
+    border-radius: 0px;
 }
 
 prompt {
     text-color: @accent;
-    font: "monospace bold 12";
+    font: "Iosevka Nerd Font Bold 12";
 }
 
 listview {
     lines: 5;
-    spacing: 8px;
+    spacing: 4px;
     scrollbar: false;
 }
 
 element {
-    padding: 10px;
-    border-radius: 0px; 
+    padding: 8px 10px;
+    border-radius: 0px;
 }
 
 element normal normal {
@@ -56,9 +57,8 @@ element normal normal {
 
 element selected normal {
     background-color: @accent;
-    text-color: @bg;
-    border: 1px solid;
-    border-color: @accent;
+    text-color: #040614;
+    border: 0px;
 }
 
 element-text, element-icon {
@@ -66,4 +66,3 @@ element-text, element-icon {
     text-color: inherit;
     cursor: inherit;
 }
-

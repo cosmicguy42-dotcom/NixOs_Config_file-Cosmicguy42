@@ -1,7 +1,7 @@
 * {
     font-family: Iosevka Nerd Font;
     font-weight: bold;
-    font-size: 14px;
+    font-size: 13px;
     border: none;
     border-radius: 0px;
     min-height: 0px;
@@ -68,7 +68,7 @@ color: #e3e1e9;
 
 
 #clock {
-  font-size: 15px;
+  font-size: 15.5px;
 }
 
 #battery {

@@ -1,6 +1,6 @@
 /**
  * Minimalist Rofi Configuration
- * Fichier prêt pour le ricing : variables de couleurs et dimensions éditables en haut.
+ * Thème : Lavender / Dark (inspiré de la capture d'écran)
  **/
 
 configuration {
@@ -12,7 +12,7 @@ configuration {
     display-window:             "ディスプレイ";
     drun-display-format:        "{name}";
     window-format:              "{w} · {c} · {t}";
-    font:                       "JetBrainsMono Nerd Font 10";
+    font:                       "Iosevka Nerd Font 12";
     icon-theme:                 "Papirus";
     disable-history:            false;
     click-to-exit:              true;
@@ -21,25 +21,24 @@ configuration {
 
 /* ===================================================================
  * Variables de Couleurs & Ricing
- * Tu peux importer "colors.rasi" ou ajuster les valeurs ci-dessous :
  * =================================================================== */
 * {
-    /* Couleurs principales - BlackMetal (Dark Metal) */
-    bg:                         #000000;
-    bg-alt:                     #121212;
-    surface:                    rgba(18, 18, 18, 0.90);
-    fg:                         #c1c1c1;
-    fg-muted:                   #666666;
-    accent:                     #ffffff;
-    accent-hover:               rgba(255, 255, 255, 0.12);
-    border-col:                 #333333;
+    /* Couleurs extraites de la screenshot */
+    bg:                         #16171c;
+    bg-alt:                     #1e1f28;
+    surface:                    rgba(22, 23, 28, 0.95);
+    fg:                         #ced1fe;
+    fg-muted:                   #6e6c87;
+    accent:                     #8d83b7;
+    accent-hover:               #8d83b7;
+    border-col:                 #3f3e52;
 
     /* Rétro-compatibilité / alias */
     foreground:                 @fg;
     border-color:               @border-col;
 
     /* Typographie & défauts */
-    font:                       "JetBrainsMono Nerd Font 10";
+    font:                       "Iosevka Nerd Font 12";
     background-color:           transparent;
     text-color:                 @fg;
 }
@@ -67,8 +66,8 @@ window {
  * =================================================================== */
 mainbox {
     enabled:                    true;
-    spacing:                    12px;
-    padding:                    16px;
+    spacing:                    8px;
+    padding:                    12px;
     orientation:                vertical;
     children:                   [ "inputbar", "listview" ];
 }
@@ -79,9 +78,11 @@ mainbox {
 inputbar {
     enabled:                    true;
     spacing:                    10px;
-    padding:                    10px 14px;
+    padding:                    8px 12px;
     border-radius:              0px;
     background-color:           @bg-alt;
+    border:                     1px solid;
+    border-color:               @border-col;
     text-color:                 @fg;
     children:                   [ "prompt", "entry" ];
 }
@@ -90,7 +91,7 @@ prompt {
     enabled:                    true;
     background-color:           transparent;
     text-color:                 @accent;
-    font:                       "JetBrainsMono Nerd Font 11";
+    font:                       "Iosevka Nerd Font Bold 12";
 }
 
 entry {
@@ -116,7 +117,7 @@ listview {
     reverse:                    false;
     fixed-height:               true;
     fixed-columns:              true;
-    spacing:                    6px;
+    spacing:                    2px;
     padding:                    4px 0px 0px 0px;
     background-color:           transparent;
 }
@@ -126,8 +127,8 @@ listview {
  * =================================================================== */
 element {
     enabled:                    true;
-    spacing:                    12px;
-    padding:                    8px 12px;
+    spacing:                    10px;
+    padding:                    7px 12px;
     border-radius:              0px;
     background-color:           transparent;
     text-color:                 @fg;
@@ -141,10 +142,9 @@ element normal.normal {
 }
 
 element selected.normal {
-    background-color:           @accent-hover;
-    text-color:                 @accent;
-    border:                     1px solid;
-    border-color:               @accent;
+    background-color:           @accent;
+    text-color:                 #040614;
+    border:                     0px;
 }
 
 element alternate.normal {
