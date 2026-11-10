@@ -41,13 +41,13 @@
 
   # Root Filesystem (ext4)
   fileSystems."/" = {
-    device = "/dev/disk/by-uuid/9bb46d78-8ce8-4287-b2c6-6fe709203908";
+    device = "/dev/disk/by-uuid/69958271-ec36-4c0b-bb10-9b4b757e5b85";
     fsType = "ext4";
   };
 
   # EFI Boot Partition (vfat)
   fileSystems."/boot" = {
-    device = "/dev/disk/by-uuid/C525-B702";
+    device = "/dev/disk/by-uuid/52B6-B25A";
     fsType = "vfat";
     options = [
       "fmask=0077"
@@ -220,9 +220,9 @@
   # ----------------------------------------------------------------------------
   # 7. User Accounts
   # ----------------------------------------------------------------------------
-  users.users."kmv22" = {
+  users.users."mwx" = {
     isNormalUser = true;
-    description = "KMV22";
+    description = "mwx";
     extraGroups = [
       "networkmanager"
       "wheel"
